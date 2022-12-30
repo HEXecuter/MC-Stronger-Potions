@@ -1,0 +1,6 @@
+name: StrongerPotions
+version: '${project.version}'
+main: com.hexecuter.minecraft.strongerpotions.StrongerPotions
+api-version: 1.19
+authors: [ HEXecuter ]
+description: This plugin allows you to continue increasing the potency and duration of all potions. No new potions are added by this plugin.
