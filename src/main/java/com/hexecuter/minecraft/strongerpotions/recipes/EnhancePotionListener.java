@@ -38,6 +38,8 @@ public class EnhancePotionListener implements Listener {
         ItemStack resultItem = firstAnvilItem.clone();
         PotionMeta firstItemPotionMeta = (PotionMeta) firstAnvilItem.getItemMeta();
         PotionMeta resultPotionMeta = (PotionMeta) resultItem.getItemMeta();
+        int materialAmount = secondAnvilItem.getAmount();
+
         // Make sure all existing custom effects are also enhanced
         if (firstItemPotionMeta.hasCustomEffects()) {
             resultPotionMeta.clearCustomEffects();
@@ -46,7 +48,7 @@ public class EnhancePotionListener implements Listener {
                     resultPotionMeta.addCustomEffect(
                             new PotionEffect(
                                     currentEffect.getType(),
-                                    currentEffect.getDuration() + 6000,
+                                    currentEffect.getDuration() + (6000 * materialAmount),
                                     currentEffect.getAmplifier()
                             ),
                             true
@@ -58,7 +60,7 @@ public class EnhancePotionListener implements Listener {
                             new PotionEffect(
                                     currentEffect.getType(),
                                     currentEffect.getDuration(),
-                                    currentEffect.getAmplifier() + 1
+                                    currentEffect.getAmplifier() + materialAmount
                             ),
                             true
                     );
@@ -78,7 +80,7 @@ public class EnhancePotionListener implements Listener {
                 resultPotionMeta.addCustomEffect(
                         new PotionEffect(
                                 firstItemPotionData.getType().getEffectType(),
-                                firstItemPotionData.isExtended() ? 15000 : 9000,
+                                firstItemPotionData.isExtended() ? 15000 + (6000 * materialAmount) : 9000 + (6000 * materialAmount),
                                 firstItemPotionData.isUpgraded() ? 2 : 1
                         )
                         , true);
@@ -87,7 +89,7 @@ public class EnhancePotionListener implements Listener {
                         new PotionEffect(
                                 firstItemPotionData.getType().getEffectType(),
                                 firstItemPotionData.isExtended() ? 9000 : 4500,
-                                firstItemPotionData.isUpgraded() ? 3 : 2
+                                firstItemPotionData.isUpgraded() ? 3 + materialAmount : 2 + materialAmount
                         )
                         , true);
             }
@@ -96,12 +98,12 @@ public class EnhancePotionListener implements Listener {
 
 
         if (validRecipeFlag) {
+            int xpCost = Math.max((materialAmount / 2), 1);
             resultItem.setItemMeta(resultPotionMeta);
             event.setResult(resultItem);
             // Delay setting the repair cost because the client immediately sets it to 0
             // Without a repair cost, the client can not retrieve the item
-            Bukkit.getScheduler().runTask(StrongerPotions.instance, () -> anvilInventory.setRepairCost(1));
+            Bukkit.getScheduler().runTask(StrongerPotions.instance, () -> anvilInventory.setRepairCost(xpCost));
         }
-
     }
 }
