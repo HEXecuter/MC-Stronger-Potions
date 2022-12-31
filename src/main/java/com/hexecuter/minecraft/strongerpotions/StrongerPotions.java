@@ -1,6 +1,6 @@
 package com.hexecuter.minecraft.strongerpotions;
 
-import com.hexecuter.minecraft.strongerpotions.recipes.EnhancePotionListener;
+import com.hexecuter.minecraft.strongerpotions.listeners.EnhancePotionListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class StrongerPotions extends JavaPlugin {
