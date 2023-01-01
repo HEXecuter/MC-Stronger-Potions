@@ -179,4 +179,10 @@ public class HelperFunctions {
         returnPotion.setAmount(Math.min(firstPotion.getAmount() + secondPotion.getAmount() - 1, 64));
         return returnPotion;
     }
+
+    public static ItemStack addToStack(ItemStack item) {
+        ItemStack newItem = item.clone();
+        newItem.setAmount(64);
+        return newItem;
+    }
 }

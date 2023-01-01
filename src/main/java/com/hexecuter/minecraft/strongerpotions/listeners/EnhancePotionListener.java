@@ -32,6 +32,9 @@ public class EnhancePotionListener implements Listener {
             } else if (HelperFunctions.isPotion(secondAnvilItem) && HelperFunctions.hasEffects(secondAnvilItem)) {
                 resultItem = HelperFunctions.mergePotions(firstAnvilItem, secondAnvilItem);
                 xpCost = Math.max((resultItem.getAmount() / 2), 1);
+            } else if (secondAnvilItem.getType() == Material.DIAMOND_BLOCK) {
+                resultItem = HelperFunctions.addToStack(firstAnvilItem);
+                xpCost = 10;
             } else {
                 return;
             }
