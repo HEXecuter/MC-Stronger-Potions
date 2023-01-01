@@ -13,8 +13,10 @@ This plugin allows you to infinitely increase the potency and duration of each p
 | Level 2 potion                | Copper Ingot            | Upgrade to level 4                                           |
 | Custom effect potion          | Copper Ingot            | Upgrade by 1 level                                           |
 | Any potion with effects       | Any potion with effects | Effects are merged into a single potion of the same type as the first potion |
+| Any potion with effects       | Diamond Block           | Potion is set to a stack size of 64                          |
 
 # Roadmap
 
 - [x] Combine potions to merge effects
+- [x] Set potion stack size to 64 with diamond block
 - [ ] Add configuration file for materials and experience level required for upgrades
