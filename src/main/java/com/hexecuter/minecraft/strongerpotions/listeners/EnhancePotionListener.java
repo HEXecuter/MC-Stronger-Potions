@@ -24,9 +24,14 @@ public class EnhancePotionListener implements Listener {
         }
 
         ItemStack resultItem;
+        int xpCost;
         if (HelperFunctions.isPotion(firstAnvilItem) && HelperFunctions.hasEffects(firstAnvilItem)) {
             if (secondAnvilItem.getType() == Material.RAW_COPPER || secondAnvilItem.getType() == Material.COPPER_INGOT) {
                 resultItem = HelperFunctions.upgradePotion(firstAnvilItem, secondAnvilItem);
+                xpCost = Math.max((secondAnvilItem.getAmount() / 2), 1);
+            } else if (HelperFunctions.isPotion(secondAnvilItem) && HelperFunctions.hasEffects(secondAnvilItem)) {
+                resultItem = HelperFunctions.mergePotions(firstAnvilItem, secondAnvilItem);
+                xpCost = Math.max((resultItem.getAmount() / 2), 1);
             } else {
                 return;
             }
@@ -35,7 +40,6 @@ public class EnhancePotionListener implements Listener {
         }
 
         if (resultItem != null) {
-            int xpCost = Math.max((resultItem.getAmount() / 2), 1);
             event.setResult(resultItem);
             // Delay setting the repair cost because the client immediately sets it to 0
             // Without a repair cost, the client can not retrieve the item
