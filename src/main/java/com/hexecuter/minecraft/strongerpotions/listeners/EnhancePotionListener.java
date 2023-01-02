@@ -5,6 +5,7 @@ import com.hexecuter.minecraft.strongerpotions.helpers.HelperFunctions;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.AnvilInventory;
@@ -13,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class EnhancePotionListener implements Listener {
 
-    @EventHandler
+    @EventHandler(priority= EventPriority.HIGHEST)
     public void onPrepareAnvilEvent(PrepareAnvilEvent event) {
         AnvilInventory anvilInventory = event.getInventory();
         ItemStack firstAnvilItem = anvilInventory.getItem(0);
